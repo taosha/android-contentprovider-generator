@@ -12,6 +12,7 @@ import android.provider.BaseColumns;
 
 public abstract class AbstractCursor extends CursorWrapper {
     private final HashMap<String, Integer> mColumnIndexes;
+    private Object tag;
 
     public AbstractCursor(Cursor cursor) {
         super(cursor);
@@ -19,6 +20,14 @@ public abstract class AbstractCursor extends CursorWrapper {
     }
 
     public abstract long getId();
+
+    public <T> T getTag() {
+        return (T) tag;
+    }
+
+    public <T> void setTag(T tag) {
+        this.tag = tag;
+    }
 
     protected int getCachedColumnIndexOrThrow(String colName) {
         Integer index = mColumnIndexes.get(colName);
